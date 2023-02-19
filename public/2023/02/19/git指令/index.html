@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="本地仓库与远程仓库关联使用Git命令将本地仓库和远程仓库连接有两种方法。 第一种： 远程(Github)先建立一个空的仓库，然后执行以下指令: 12345678git remote add origin git@github.com:michaelliao&#x2F;learngit.git# 需要改成自己的库 否则推不上去；别人的库则fork成自己的库# 把本地库的内容推送上去git push -u or">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git指令">
+<meta property="og:url" content="https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="跬步集">
+<meta property="og:description" content="本地仓库与远程仓库关联使用Git命令将本地仓库和远程仓库连接有两种方法。 第一种： 远程(Github)先建立一个空的仓库，然后执行以下指令: 12345678git remote add origin git@github.com:michaelliao&#x2F;learngit.git# 需要改成自己的库 否则推不上去；别人的库则fork成自己的库# 把本地库的内容推送上去git push -u or">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xuanhaozhao.github.io/public/images/pic1.png">
+<meta property="article:published_time" content="2023-02-19T08:36:00.000Z">
+<meta property="article:modified_time" content="2023-02-19T09:17:58.067Z">
+<meta property="article:author" content="Xuanhao Chao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xuanhaozhao.github.io/public/images/pic1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/public/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/public/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/public/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>git指令</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/public/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/public/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://xuanhaozhao.github.io">About</a></li><!--
+     --><!--
+       --><li><a href="/public/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/XuanhaoZhao">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/public/2023/02/19/%E5%85%B3%E4%BA%8E%E5%AE%9E%E8%AF%9A/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&text=git指令"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&title=git指令"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&is_video=false&description=git指令"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=git指令&body=Check out this article: https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&title=git指令"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&title=git指令"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&title=git指令"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&title=git指令"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&name=git指令&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&t=git指令"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%85%B3%E8%81%94"><span class="toc-number">1.</span> <span class="toc-text">本地仓库与远程仓库关联</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="toc-number">2.</span> <span class="toc-text">删除远程库</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E9%94%99%E8%AF%AF"><span class="toc-number">2.1.</span> <span class="toc-text">分享一个错误</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-number"></span> <span class="toc-text">reference</span></a>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        git指令
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Xuanhao Chao</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-02-19T08:36:00.000Z" itemprop="datePublished">2023-02-19</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h4 id="本地仓库与远程仓库关联"><a href="#本地仓库与远程仓库关联" class="headerlink" title="本地仓库与远程仓库关联"></a>本地仓库与远程仓库关联</h4><p>使用Git命令将本地仓库和远程仓库连接有两种方法。</p>
+<p>第一种：</p>
+<p>远程(Github)先建立一个空的仓库，然后执行以下指令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:michaelliao/learngit.git</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">需要改成自己的库 否则推不上去；别人的库则fork成自己的库</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">把本地库的内容推送上去</span></span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">第一次以后的提交可以使用命令</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<p>由于远程库是空的，我们第一次推送<code>master</code>分支时，加上了<code>-u</code>参数，Git不但会把本地的<code>master</code>分支内容推送的远程新的<code>master</code>分支，还会把本地的<code>master</code>分支和远程的<code>master</code>分支关联起来，在以后的推送或者拉取时就可以简化命令。[1]</p>
+<p>第二种：</p>
+<p>不用关联Git仓库，使用ssh密钥的方式直接从Git克隆源码到本地，与本地关联。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从GitHub上克隆项目到本地</span></span><br><span class="line">git clone git@github.com:michaelliao/learngit.git # 需要改成自己的库 否则推不上去；别人的库则fork成自己的库</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加文件</span></span><br><span class="line">git add ./* # 将目录中所有文件添加</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">提交缓存</span></span><br><span class="line">git commit -m &#x27;提交&#x27; # &#x27;&#x27;里的算注释，在仓库可以看到</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">提交到远程GitHub仓库</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除远程库"><a href="#删除远程库" class="headerlink" title="删除远程库"></a>删除远程库</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看远程库的信息</span></span><br><span class="line">git remote -v</span><br><span class="line"></span><br><span class="line">result:</span><br><span class="line">origin  git@github.com:michaelliao/learn-git.git (fetch)</span><br><span class="line">origin  git@github.com:michaelliao/learn-git.git (push)</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">根据名字删除</span></span><br></pre></td></tr></table></figure>
+
+<p>此时，删除仅仅是删除本地与远程的绑定关系。远程库并没有被删除。需要删除还需要登入GitHub手动删除。</p>
+<h5 id="分享一个错误"><a href="#分享一个错误" class="headerlink" title="分享一个错误"></a>分享一个错误</h5><p>在某次提交时，我得到了一个这样的报错。</p>
+<p><img src="/public/images/pic1.png" alt="Screen Shot 2023-02-19 at 15.11.20"></p>
+<p>这是由于远程库与本地库不一致。我一开始使用的方法是手动上传，同步一次库。</p>
+<p>解决方法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase origin master</span><br></pre></td></tr></table></figure>
+
+<p>该命令的意思是把远程库中的<code>更新合并</code>到（<strong>pull&#x3D;fetch+merge</strong>）本地库中，<strong>–-rebase</strong>的作用是取消掉本地库中刚刚的commit，并把他们<strong>接到</strong>更新后的版本库之中。出现如下图执行pull执行成功后，可以成功执行git push origin master操作。</p>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><blockquote>
+<p>[1]<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600/898732864121440">https://www.liaoxuefeng.com/wiki/896043488029600/898732864121440</a></p>
+<p>[2]<a target="_blank" rel="noopener" href="https://blog.csdn.net/dietime1943/article/details/85682688">https://blog.csdn.net/dietime1943/article/details/85682688</a></p>
+</blockquote>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/public/">Home</a></li>
+         
+          <li><a href="https://xuanhaozhao.github.io">About</a></li>
+         
+          <li><a href="/public/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/XuanhaoZhao">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%85%B3%E8%81%94"><span class="toc-number">1.</span> <span class="toc-text">本地仓库与远程仓库关联</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="toc-number">2.</span> <span class="toc-text">删除远程库</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E9%94%99%E8%AF%AF"><span class="toc-number">2.1.</span> <span class="toc-text">分享一个错误</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-number"></span> <span class="toc-text">reference</span></a>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&text=git指令"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&title=git指令"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&is_video=false&description=git指令"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=git指令&body=Check out this article: https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&title=git指令"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&title=git指令"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&title=git指令"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&title=git指令"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&name=git指令&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://xuanhaozhao.github.io/public/2023/02/19/git%E6%8C%87%E4%BB%A4/&t=git指令"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    Xuanhao Chao
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/public/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://xuanhaozhao.github.io">About</a></li><!--
+     --><!--
+       --><li><a href="/public/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/XuanhaoZhao">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/public/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
